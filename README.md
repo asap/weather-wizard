@@ -20,8 +20,8 @@ It's recommended that you use virtalenv or virtalenvwrapper when trying this out
 
 * Install required libraries
 
-      pip install requirements.txt
+         pip install requirements.txt
 
 * Run the app
 
-      python runserver.py
+         python runserver.py
