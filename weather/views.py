@@ -26,10 +26,7 @@ def forecast(lat=None, lng=None):
 
     r = requests.get(url)
 
-    if r.ok:
-        return jsonify(r.json())
-    else:
-        return jsonify({})
+    return jsonify(r.json() if r.ok else {})
 
 
 # Errors
