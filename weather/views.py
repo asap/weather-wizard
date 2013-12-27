@@ -28,25 +28,17 @@ def forecast(lat=None, lng=None):
 
     return jsonify(r.json() if r.ok else {})
 
-# Errors
-@app.errorhandler(400)
-def bad_request(e):
-    """ Returns a 400 Bad Request """
-    return jsonify(
-        {
-            "status": "400",
-            "error": e.name,
-            "description": e.description,
-        }
-    ), 400
 
-@app.errorhandler(404)
-def page_not_found(e):
-    """ Returns a 404 Page not found """
+# Errors
+def handle_error(error):
+    """ Return an error page """
     return jsonify(
         {
-            "status": "404",
-            "error": e.name,
-            "description": e.description,
+            "status": str(error.code),
+            "error": error.name,
+            "description": error.description,
         }
-    ), 404 
+    ), error.code
+    
+for e in (400, 404):
+    app.errorhandler(e)(handle_error)
